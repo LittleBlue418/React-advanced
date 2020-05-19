@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
 
-import Person from './Person/Person';
-import UserInputBox from './UserInputBox/UserInputBox'
-import LetterCard from './LetterCard/LetterCard';
+import Person from '../components/Persons/Person/Person';
+import UserInputBox from '../components/UserInputBox/UserInputBox'
+import LetterCard from '../components/LetterCard/LetterCard';
 
 
 class App extends Component {
