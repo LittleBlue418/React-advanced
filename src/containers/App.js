@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 import UserInputBox from '../components/UserInputBox/UserInputBox'
 import LetterCard from '../components/LetterCard/LetterCard';
 
@@ -86,8 +87,6 @@ class App extends Component {
     let persons = null;
     let letterCards = null;
 
-    let btnClasses = [classes.Button];
-
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -98,8 +97,6 @@ class App extends Component {
           />
         </div>
       );
-
-      btnClasses.push(classes.Red);
     }
 
     if (this.state.userTextArray.length > 0) {
@@ -115,14 +112,6 @@ class App extends Component {
       )
     }
 
-    const assignedClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
-    }
 
     return (
         <div className={classes.App}>
@@ -134,14 +123,10 @@ class App extends Component {
 
           {letterCards}
 
-          <h1>The Fam</h1>
-          <p className={assignedClasses.join(' ')}>The family members!</p>
-          <button
-            className={btnClasses.join(' ')}
-            onClick={this.togglePersonsHandler}>
-              Show People
-          </button>
-
+          <Cockpit
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler} />
 
           {persons}
 
