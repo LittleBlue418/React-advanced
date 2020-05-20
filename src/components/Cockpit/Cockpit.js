@@ -21,7 +21,7 @@ const cockpit = (props) => {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>The Fam</h1>
+      <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>The family members!</p>
       <button
         className={btnClasses.join(' ')}
