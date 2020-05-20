@@ -4,7 +4,7 @@ import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import UserInputBox from '../components/UserInputBox/UserInputBox'
-import LetterCard from '../components/LetterCard/LetterCard';
+import LetterCards from '../components/LetterCards/LetterCards';
 
 
 class App extends Component {
@@ -60,13 +60,13 @@ class App extends Component {
     this.setState({ persons: persons })
   }
 
-  deleteLetterCard = (cardIndex) => {
+  deleteLetterCard = (event) => {
     const newUserTextArray = [...this.state.userTextArray];
     const newUserTextHolder = this.state.userText.split("");
 
-    newUserTextArray.splice(cardIndex, 1);
+    newUserTextArray.splice(event.value, 1);
 
-    newUserTextHolder.splice(cardIndex, 1);
+    newUserTextHolder.splice(event.value, 1);
 
     const newUserText = newUserTextHolder.join("");
 
@@ -98,14 +98,10 @@ class App extends Component {
 
     if (this.state.userTextArray.length > 0) {
       letterCards = (
-        <div>
-          {this.state.userTextArray.map((letterObject, index) => {
-            return <LetterCard
-              click={() => this.deleteLetterCard(index)}
-              letter={letterObject.letter}
-              key={letterObject.id} />
-          })}
-        </div>
+        <LetterCards
+          userTextArray={this.state.userTextArray}
+          clicked={(event) => this.deleteLetterCard(event)}
+          />
       )
     }
 
