@@ -22,6 +22,7 @@ class App extends Component {
     ],
     otherState: 'Some other value',
     showPersons: false,
+    // showCockpit: true,
     userText: '',
     userTextArray: {},
   };
@@ -141,11 +142,19 @@ class App extends Component {
 
           {letterCards}
 
-          <Cockpit
+          {/* <button onClick={() => {
+            this.setState( {showCockpit: false });
+          }}
+          >
+            Remove Cockpit
+          </button> */}
+
+          {this.state.showCockpit ? (<Cockpit
             title={this.props.appTitle}
             showPersons={this.state.showPersons}
             persons={this.state.persons}
             clicked={this.togglePersonsHandler} />
+          ) : null}
 
           {persons}
 
