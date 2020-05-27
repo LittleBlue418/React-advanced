@@ -13,16 +13,16 @@ const Cockpit = (props) => {
       }
     }, []);
 
-  //  useEffect(() => {
-  //    console.log('[Cockpit.js] 2nd useEffect');
-  //    return () => {
-  //     console.log('[Cockpit.js] cleanup work in 2nd useEffect')
-  //    }
-  //  });
+    useEffect(() => {
+      console.log('[Cockpit.js] 2nd useEffect');
+      return () => {
+       console.log('[Cockpit.js] cleanup work in 2nd useEffect')
+      }
+    });
 
-    // useEffect(() => {
-    //   alert('first time loading')
-    // }, [])
+     useEffect(() => {
+       alert('first time loading')
+     }, [])
 
   const assignedClasses = [];
   let btnClasses = [classes.Button,];
