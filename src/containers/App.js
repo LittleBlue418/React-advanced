@@ -5,6 +5,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import UserInputBox from '../components/UserInputBox/UserInputBox'
 import LetterCards from '../components/LetterCards/LetterCards';
+import WithClass from '../hoc/WithClass';
 
 
 class App extends Component {
@@ -133,7 +134,7 @@ class App extends Component {
 
 
     return (
-        <div className={classes.App}>
+        <WithClass classes={classes.App}>
 
           <UserInputBox
             changed={(event) => this.userEnteredText(event)}
@@ -159,7 +160,7 @@ class App extends Component {
 
           {persons}
 
-        </div>
+        </WithClass>
     );
   }
 }
