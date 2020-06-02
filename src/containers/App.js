@@ -5,7 +5,9 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import UserInputBox from '../components/UserInputBox/UserInputBox'
 import LetterCards from '../components/LetterCards/LetterCards';
-import WithClass from '../hoc/WithClass';
+// import WithClass from '../hoc/WithClass';
+import withClass2 from '../hoc/WithClass2';
+import Auxiliary from '../hoc/Auxiliary';
 
 
 class App extends Component {
@@ -134,7 +136,8 @@ class App extends Component {
 
 
     return (
-        <WithClass classes={classes.App}>
+        //<WithClass classes={classes.App}>
+        <Auxiliary>
 
           <UserInputBox
             changed={(event) => this.userEnteredText(event)}
@@ -160,9 +163,10 @@ class App extends Component {
 
           {persons}
 
-        </WithClass>
+        </Auxiliary>
+        //</WithClass>
     );
   }
 }
 
-export default App;
+export default withClass2(App, classes.App);
