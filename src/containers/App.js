@@ -8,6 +8,7 @@ import LetterCards from '../components/LetterCards/LetterCards';
 // import WithClass from '../hoc/WithClass';
 import withClass2 from '../hoc/WithClass2';
 import Auxiliary from '../hoc/Auxiliary';
+import AuthContext from '../context/auth-context';
 
 
 class App extends Component {
@@ -28,7 +29,8 @@ class App extends Component {
     showCockpit: true,
     userText: '',
     userTextArray: {},
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   // static getDerivedStateFromProps(props, state) {
@@ -64,7 +66,7 @@ class App extends Component {
     this.setState((prevState, props) => {
       return {
         persons: persons,
-        changeCounter: prevState.changeCounter +1
+        changeCounter: prevState.changeCounter + 1
       }
     });
   }
@@ -117,6 +119,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true })
+  }
+
   render() {
     //console.log('[App.js] render')
     let persons = null;
@@ -124,10 +130,12 @@ class App extends Component {
 
     if (this.state.showPersons) {
       persons = (
-          <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
+        />
       );
     }
 
@@ -136,41 +144,49 @@ class App extends Component {
         <LetterCards
           userTextArray={this.state.userTextArray}
           clicked={(event) => this.deleteLetterCard(event)}
-          />
+        />
       )
     }
 
 
     return (
-        //<WithClass classes={classes.App}>
-        <Auxiliary>
+      //<WithClass classes={classes.App}>
+      <Auxiliary>
 
-          <UserInputBox
-            changed={(event) => this.userEnteredText(event)}
-            userText={this.state.userText}
-            length={this.state.userTextArray.length} />
+        <UserInputBox
+          changed={(event) => this.userEnteredText(event)}
+          userText={this.state.userText}
+          length={this.state.userTextArray.length} />
 
-          {letterCards}
+        {letterCards}
 
-          { <button onClick={() => {
-            this.setState( {showCockpit: false });
-          }}
-          >
-            Remove Cockpit
+        {<button onClick={() => {
+          this.setState({ showCockpit: false });
+        }}
+        >
+          Remove Cockpit
           </button>}
+
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}>
 
           {this.state.showCockpit ? (
             <Cockpit
               title={this.props.appTitle}
               showPersons={this.state.showPersons}
               personsLength={this.state.persons.length}
-              clicked={this.togglePersonsHandler} />
+              clicked={this.togglePersonsHandler}
+            />
           ) : null}
 
           {persons}
+        </AuthContext.Provider>
 
-        </Auxiliary>
-        //</WithClass>
+      </Auxiliary>
+      //</WithClass>
     );
   }
 }
